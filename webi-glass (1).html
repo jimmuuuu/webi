@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webi — Web Design Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4ff;
+    --white: #ffffff;
+    --text: #0a0a1a;
+    --text-sub: #4a4a6a;
+    --muted: #8888aa;
+    --red: #e5111b;
+    --teal: #14b8a6;
+    --pink: #ec4899;
+    --font: 'Plus Jakarta Sans', sans-serif;
+    --radius: 20px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  #cursor {
+    position: fixed; width: 12px; height: 12px; border-radius: 50%;
+    background: linear-gradient(135deg, #e5111b, #ec4899);
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, opacity 0.2s;
+    mix-blend-mode: multiply;
+  }
+  #cursor-glow {
+    position: fixed; width: 40px; height: 40px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(229,17,27,0.25), transparent 70%);
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: left 0.12s ease, top 0.12s ease;
+  }
+  body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 20px; height: 20px; }
+
+  /* BLOBS */
+  .bg-blobs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.45; animation: blobFloat 12s ease-in-out infinite; }
+  .blob-1 { width: 600px; height: 600px; background: radial-gradient(circle, #2dd4bf, #0d9488); top: -100px; left: -100px; animation-delay: 0s; }
+  .blob-2 { width: 500px; height: 500px; background: radial-gradient(circle, #f472b6, #ec4899); top: 200px; right: -100px; animation-delay: -4s; }
+  .blob-3 { width: 450px; height: 450px; background: radial-gradient(circle, #fca5a5, #e5111b); bottom: 100px; left: 30%; animation-delay: -8s; }
+  .blob-4 { width: 350px; height: 350px; background: radial-gradient(circle, #99f6e4, #14b8a6); bottom: -50px; right: 20%; animation-delay: -2s; }
+  .blob-5 { width: 300px; height: 300px; background: radial-gradient(circle, #fda4af, #f43f5e); top: 50%; left: 20%; animation-delay: -6s; }
+
+  @keyframes blobFloat {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px,-30px) scale(1.05); }
+    66% { transform: translate(-20px,20px) scale(0.97); }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+    z-index: 200; width: calc(100% - 48px); max-width: 1100px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.5rem; border-radius: 100px;
+    animation: fadeDown 0.6s ease both;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid rgba(255,255,255,0.95);
+    box-shadow: 0 4px 24px rgba(0,0,60,0.08), inset 0 1px 0 #fff;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  .nav-logo-wrap { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+
+  .nav-logo-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, #e5111b, #ec4899, #14b8a6);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 900; color: #fff;
+    box-shadow: 0 2px 10px rgba(229,17,27,0.35);
+    font-family: var(--font);
+  }
+
+  .nav-logo-text {
+    font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #e5111b, #14b8a6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-sub); text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    padding: 0.4rem 0.9rem; border-radius: 100px; transition: all 0.2s; cursor: none;
+  }
+  .nav-links a:hover { background: rgba(0,0,0,0.06); color: var(--text); }
+  .nav-cta {
+    background: linear-gradient(135deg, #e5111b, #ec4899) !important;
+    color: #fff !important; padding: 0.5rem 1.25rem !important;
+    border-radius: 100px !important; font-weight: 600 !important;
+    box-shadow: 0 4px 15px rgba(229,17,27,0.3) !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+  .nav-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 25px rgba(229,17,27,0.4) !important; }
+
+  /* LAYOUT */
+  .container { position: relative; z-index: 1; }
+  section { padding: 7rem 5%; position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 10rem 5% 6rem; text-align: center; flex-direction: column; justify-content: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 2rem;
+    background: rgba(255,255,255,0.75); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.95);
+    box-shadow: 0 2px 12px rgba(0,0,60,0.06);
+    animation: fadeUp 0.6s ease both;
+    font-size: 0.8rem; font-weight: 600; color: var(--text-sub);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: linear-gradient(135deg, #e5111b, #14b8a6);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.7; }
+  }
+
+  .hero h1 {
+    font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 800;
+    letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both; color: var(--text);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #e5111b 0%, #ec4899 40%, #14b8a6 80%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem; color: var(--text-sub); max-width: 560px;
+    margin: 0 auto 2.5rem; font-weight: 400; line-height: 1.7;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both; margin-bottom: 4rem;
+  }
+
+  .btn-gradient {
+    background: linear-gradient(135deg, #e5111b, #ec4899);
+    color: #fff; padding: 0.9rem 2.25rem; border-radius: 100px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    box-shadow: 0 6px 20px rgba(229,17,27,0.35);
+    transition: transform 0.2s, box-shadow 0.2s; display: inline-block;
+    position: relative; overflow: hidden; cursor: none;
+  }
+  .btn-gradient::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, #ff3b5c, #f472b6);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(229,17,27,0.45); }
+  .btn-gradient:hover::before { opacity: 1; }
+  .btn-gradient span { position: relative; z-index: 1; }
+
+  .btn-glass {
+    background: rgba(255,255,255,0.75); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.95); color: var(--text);
+    padding: 0.9rem 2.25rem; border-radius: 100px; text-decoration: none;
+    font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 16px rgba(0,0,60,0.08);
+    transition: transform 0.2s, box-shadow 0.2s; display: inline-block; cursor: none;
+  }
+  .btn-glass:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,60,0.12); }
+
+  .hero-stats {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .stat-glass {
+    padding: 1.25rem 2rem; border-radius: var(--radius); text-align: center;
+    background: rgba(255,255,255,0.65); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.95);
+    box-shadow: 0 4px 20px rgba(0,0,60,0.06), inset 0 1px 0 #fff;
+    transition: transform 0.25s;
+  }
+  .stat-glass:hover { transform: translateY(-4px); }
+
+  .stat-num {
+    font-size: 2rem; font-weight: 800; letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #e5111b, #14b8a6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: 0.75rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2rem; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* MARQUEE */
+  .marquee-section {
+    padding: 1.5rem 0; overflow: hidden;
+    background: rgba(255,255,255,0.45); backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8);
+  }
+  .marquee-track { display: flex; gap: 2rem; animation: marquee 22s linear infinite; white-space: nowrap; }
+  .marquee-item {
+    display: flex; align-items: center; gap: 2rem; flex-shrink: 0;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .marquee-item::after { content: '✦'; background: linear-gradient(135deg, #e5111b, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTION HEADERS */
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 1rem;
+    background: linear-gradient(135deg, #e5111b, #ec4899);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-title { font-size: clamp(2.2rem,4vw,3.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; color: var(--text); }
+  .section-sub { color: var(--text-sub); font-size: 1rem; max-width: 460px; line-height: 1.7; }
+
+  /* GLASS CARD BASE */
+  .glass-card {
+    background: rgba(255,255,255,0.62); backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.95);
+    box-shadow: 0 4px 20px rgba(0,0,60,0.06), inset 0 1px 0 #fff;
+    border-radius: var(--radius);
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text p { color: var(--text-sub); margin-bottom: 1.25rem; font-size: 1rem; line-height: 1.75; }
+  .about-text p strong { color: var(--text); font-weight: 600; }
+  .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+
+  .about-card {
+    padding: 1.75rem; border-radius: var(--radius);
+    display: flex; gap: 1.25rem; align-items: flex-start;
+    transition: transform 0.3s, box-shadow 0.3s;
+    will-change: transform;
+  }
+  .about-card.glass-card:hover { box-shadow: 0 12px 32px rgba(0,0,60,0.1), inset 0 1px 0 #fff; }
+
+  .about-card-icon { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+  .icon-red { background: linear-gradient(135deg, rgba(229,17,27,0.12), rgba(229,17,27,0.04)); }
+  .icon-teal { background: linear-gradient(135deg, rgba(20,184,166,0.15), rgba(20,184,166,0.04)); }
+  .icon-pink { background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(236,72,153,0.04)); }
+
+  .about-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--text); }
+  .about-card p { color: var(--text-sub); font-size: 0.88rem; line-height: 1.6; }
+
+  /* PROCESS */
+  .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+  .process-step { padding: 2rem 1.5rem; border-radius: var(--radius); text-align: center; transition: transform 0.3s, box-shadow 0.3s; will-change: transform; }
+  .process-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, #e5111b, #ec4899);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem; font-size: 1.1rem; font-weight: 800; color: #fff;
+    box-shadow: 0 4px 16px rgba(229,17,27,0.35);
+  }
+  .process-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .process-step p { color: var(--text-sub); font-size: 0.85rem; line-height: 1.6; }
+
+  /* WHY WEBI */
+  .why { background: transparent; }
+  .why-table-wrap { overflow-x: auto; border-radius: var(--radius); }
+  .why-table { width: 100%; border-collapse: collapse; }
+  .why-table th {
+    padding: 1.25rem 1.5rem; text-align: center; font-size: 0.85rem;
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    background: rgba(255,255,255,0.5);
+  }
+  .why-table th:first-child { text-align: left; }
+  .why-table th.highlight {
+    background: linear-gradient(135deg, rgba(229,17,27,0.1), rgba(236,72,153,0.08));
+    color: #e5111b;
+  }
+  .why-table td {
+    padding: 1rem 1.5rem; font-size: 0.9rem; text-align: center;
+    color: var(--text-sub); border-top: 1px solid rgba(0,0,0,0.04);
+    background: rgba(255,255,255,0.4);
+  }
+  .why-table td:first-child { text-align: left; font-weight: 500; color: var(--text); }
+  .why-table td.highlight { background: rgba(229,17,27,0.04); }
+  .why-table tr:last-child td { border-radius: 0 0 var(--radius) var(--radius); }
+  .check-yes { color: #14b8a6; font-size: 1.1rem; font-weight: 700; }
+  .check-no { color: var(--muted); font-size: 1.1rem; }
+  .check-maybe { color: #f59e0b; font-size: 1rem; }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; align-items: start; }
+
+  .pricing-card {
+    padding: 2.5rem; border-radius: 24px; position: relative;
+    display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; will-change: transform;
+  }
+  .pricing-card.featured {
+    background: linear-gradient(160deg, rgba(229,17,27,0.07) 0%, rgba(236,72,153,0.07) 100%) !important;
+    border: 1.5px solid rgba(229,17,27,0.3) !important;
+    box-shadow: 0 8px 32px rgba(229,17,27,0.12), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+    transform: scale(1.03);
+  }
+  .pricing-card.featured:hover { transform: scale(1.03) translateY(-8px) !important; }
+
+  .pricing-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, #e5111b, #ec4899);
+    color: #fff; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 1rem; border-radius: 100px; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(229,17,27,0.4);
+  }
+
+  .pricing-name { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem; }
+  .pricing-desc { color: var(--text-sub); font-size: 0.85rem; margin-bottom: 1.5rem; line-height: 1.5; }
+  .pricing-price { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.25rem; }
+  .pricing-price sup { font-size: 1.4rem; vertical-align: top; margin-top: 0.7rem; display: inline-block; font-weight: 600; }
+  .pricing-billing { color: var(--muted); font-size: 0.78rem; margin-bottom: 2rem; }
+
+  .pricing-features { list-style: none; margin-bottom: 2rem; flex: 1; }
+  .pricing-features li { display: flex; align-items: center; gap: 0.75rem; color: var(--text-sub); font-size: 0.88rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+  .pricing-features li:last-child { border-bottom: none; }
+  .pricing-features li .check { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, #e5111b, #ec4899); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: #fff; font-weight: 700; }
+  .pricing-features li.dim { opacity: 0.35; }
+  .pricing-features li.dim .check { background: rgba(0,0,0,0.15); }
+
+  .pricing-btn { display: block; text-align: center; padding: 0.9rem; border-radius: 100px; font-size: 0.88rem; font-weight: 700; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; margin-top: auto; cursor: none; }
+  .pricing-btn-outline { border: 1.5px solid rgba(229,17,27,0.3); color: #e5111b; background: rgba(229,17,27,0.04); }
+  .pricing-btn-outline:hover { transform: translateY(-2px); background: rgba(229,17,27,0.1); }
+  .pricing-btn-filled { background: linear-gradient(135deg, #e5111b, #ec4899); color: #fff; border: none; box-shadow: 0 6px 20px rgba(229,17,27,0.35); }
+  .pricing-btn-filled:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(229,17,27,0.45); }
+
+  /* TESTIMONIALS */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .testimonial-card { padding: 2rem; border-radius: var(--radius); position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; will-change: transform; }
+  .testimonial-card::before { content: '"'; font-size: 8rem; font-weight: 900; line-height: 1; position: absolute; top: -10px; right: 16px; color: #e5111b; opacity: 0.07; font-family: Georgia, serif; }
+  .stars { font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+  .star { background: linear-gradient(135deg, #e5111b, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .testimonial-text { color: var(--text-sub); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .t-avatar { width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800; color: #fff; }
+  .av-1 { background: linear-gradient(135deg, #e5111b, #ec4899); }
+  .av-2 { background: linear-gradient(135deg, #0d9488, #14b8a6); }
+  .av-3 { background: linear-gradient(135deg, #ec4899, #f43f5e); }
+  .t-name { font-weight: 700; font-size: 0.9rem; }
+  .t-role { color: var(--muted); font-size: 0.78rem; }
+
+  /* FAQ */
+  .faq { background: transparent; }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 900px; margin: 0 auto; }
+  .faq-item { border-radius: 16px; overflow: hidden; transition: transform 0.2s; }
+  .faq-item:hover { transform: translateY(-2px); }
+  .faq-q {
+    width: 100%; text-align: left; padding: 1.25rem 1.5rem;
+    background: transparent; border: none; cursor: none;
+    font-family: var(--font); font-size: 0.95rem; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .faq-q:hover { color: #e5111b; }
+  .faq-icon { font-size: 1.2rem; color: #e5111b; transition: transform 0.3s; flex-shrink: 0; font-weight: 300; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; padding: 0 1.5rem; color: var(--text-sub); font-size: 0.9rem; line-height: 1.7; }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.25rem; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
+  .contact-info p { color: var(--text-sub); margin-bottom: 2rem; line-height: 1.75; }
+  .contact-detail { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.85rem; color: var(--text-sub); font-size: 0.9rem; transition: all 0.2s; padding: 0.6rem 0.85rem; border-radius: 12px; cursor: none; }
+  .contact-detail:hover { background: rgba(255,255,255,0.65); transform: translateX(4px); color: var(--text); }
+  .contact-detail-icon { width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; background: linear-gradient(135deg, rgba(229,17,27,0.1), rgba(236,72,153,0.06)); }
+  .form-glass-wrap { padding: 2.5rem; border-radius: 24px; }
+  .form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.75rem; font-weight: 600; color: var(--text-sub); letter-spacing: 0.05em; text-transform: uppercase; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: rgba(255,255,255,0.85); border: 1.5px solid rgba(0,0,0,0.08);
+    border-radius: 12px; padding: 0.8rem 1rem; color: var(--text);
+    font-family: var(--font); font-size: 0.9rem; outline: none;
+    transition: all 0.2s; -webkit-appearance: none; cursor: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: rgba(229,17,27,0.4); box-shadow: 0 0 0 3px rgba(229,17,27,0.08); transform: translateY(-1px); background: #fff;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(100,100,150,0.5); }
+  .form-group select { cursor: none; }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    background: linear-gradient(135deg, #e5111b, #ec4899); color: #fff; border: none;
+    padding: 1rem 2rem; border-radius: 100px; font-family: var(--font); font-size: 0.9rem;
+    font-weight: 700; cursor: none; box-shadow: 0 6px 20px rgba(229,17,27,0.35);
+    transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden;
+  }
+  .form-submit::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, #ff3b5c, #f472b6); opacity: 0; transition: opacity 0.3s; }
+  .form-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(229,17,27,0.45); }
+  .form-submit:hover::before { opacity: 1; }
+  .form-submit span { position: relative; z-index: 1; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* FOOTER */
+  footer {
+    position: relative; z-index: 1;
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255,255,255,0.8);
+    padding: 4rem 5% 2rem;
+  }
+
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+
+  .footer-brand p { color: var(--text-sub); font-size: 0.9rem; line-height: 1.7; margin-top: 0.75rem; max-width: 240px; }
+
+  .footer-logo-wrap { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; margin-bottom: 0.5rem; }
+  .footer-logo-icon { width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, #e5111b, #ec4899, #14b8a6); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 900; color: #fff; }
+  .footer-logo-text { font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, #e5111b, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  .footer-col h4 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); margin-bottom: 1rem; }
+  .footer-col a { display: block; color: var(--text-sub); text-decoration: none; font-size: 0.88rem; margin-bottom: 0.6rem; transition: color 0.2s, transform 0.2s; cursor: none; }
+  .footer-col a:hover { color: #e5111b; transform: translateX(3px); }
+
+  .footer-socials { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.95);
+    font-size: 0.85rem; transition: transform 0.2s, box-shadow 0.2s; cursor: none; text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,60,0.06);
+  }
+  .social-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(229,17,27,0.2); }
+
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.06); }
+  .footer-bottom p { color: var(--muted); font-size: 0.8rem; }
+  .footer-bottom-links { display: flex; gap: 1.5rem; }
+  .footer-bottom-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; cursor: none; }
+  .footer-bottom-links a:hover { color: #e5111b; }
+
+  /* RIPPLE */
+  .ripple { position: absolute; border-radius: 50%; background: rgba(229,17,27,0.25); transform: scale(0); animation: rippleEffect 0.6s linear; pointer-events: none; }
+  @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
+
+  @media (max-width: 768px) {
+    nav { width: calc(100% - 24px); top: 8px; }
+    .nav-links li:not(:last-child) { display: none; }
+    .hero { padding: 8rem 5% 4rem; }
+    .hero h1 { font-size: clamp(2.8rem,12vw,4rem); }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .pricing-grid, .testimonials-grid, .faq-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: scale(1); }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    section { padding: 5rem 4%; }
+    body { cursor: auto; }
+    #cursor, #cursor-glow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-glow"></div>
+
+<!-- BLOBS -->
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <div class="blob blob-5"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo-wrap">
+    <div class="nav-logo-icon">W</div>
+    <span class="nav-logo-text">Webi.</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta">Get In Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero container">
+  <div class="hero-eyebrow"><div class="eyebrow-dot"></div>Web Design Company — Kansas City</div>
+  <h1>We Build <span class="gradient-text">Websites</span><br>That <span id="typing-word"></span></h1>
+  <p class="hero-sub">Webi crafts fast, modern, and conversion-focused websites for businesses that are serious about their online presence.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-gradient"><span>Get In Contact →</span></a>
+    <a href="#pricing" class="btn-glass">See Pricing</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-glass"><div class="stat-num" data-target="20" data-suffix="+">0</div><div class="stat-label">Sites Delivered</div></div>
+    <div class="stat-glass"><div class="stat-num" data-target="100" data-suffix="%">0</div><div class="stat-label">Client Satisfaction</div></div>
+    <div class="stat-glass"><div class="stat-num" data-target="7" data-suffix=" days">0</div><div class="stat-label">Avg Turnaround</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Web Design</span><span class="marquee-item">Mobile First</span><span class="marquee-item">Fast Delivery</span><span class="marquee-item">Built to Convert</span><span class="marquee-item">Custom Sites</span><span class="marquee-item">Real Results</span>
+    <span class="marquee-item">Web Design</span><span class="marquee-item">Mobile First</span><span class="marquee-item">Fast Delivery</span><span class="marquee-item">Built to Convert</span><span class="marquee-item">Custom Sites</span><span class="marquee-item">Real Results</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about container" id="about">
+  <div class="about-grid">
+    <div class="about-text reveal reveal-left">
+      <div class="section-tag">Who We Are</div>
+      <h2 class="section-title">Built different.<br>On purpose.</h2>
+      <p>Webi isn't your average web company. We're a lean, focused team that builds websites with one goal — <strong>results for your business.</strong></p>
+      <p>No bloated timelines. No confusing processes. We learn your business, build something that represents it, and deliver fast — without cutting corners.</p>
+      <p>Every site is <strong>custom, mobile-first, and built to convert.</strong> No templates. No filler. Just clean, sharp work.</p>
+    </div>
+    <div class="about-cards">
+      <div class="about-card glass-card reveal reveal-delay-1">
+        <div class="about-card-icon icon-red">⚡</div>
+        <div><h3>Fast Delivery</h3><p>Most projects complete within 7 days. We move quickly without sacrificing quality.</p></div>
+      </div>
+      <div class="about-card glass-card reveal reveal-delay-2">
+        <div class="about-card-icon icon-teal">📱</div>
+        <div><h3>Mobile-First Design</h3><p>Every site looks flawless on any device — phone, tablet, or desktop. No exceptions.</p></div>
+      </div>
+      <div class="about-card glass-card reveal reveal-delay-3">
+        <div class="about-card-icon icon-pink">🎯</div>
+        <div><h3>Built to Convert</h3><p>We design with your goals in mind. Every element has a purpose behind it.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="container" id="process">
+  <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+    <div class="section-tag" style="justify-content:center;">How It Works</div>
+    <h2 class="section-title">Simple. Fast. Done.</h2>
+    <p class="section-sub" style="margin:0 auto;">No confusion. Here's exactly what working with Webi looks like.</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step glass-card reveal reveal-delay-1"><div class="process-num">01</div><h3>Discovery Call</h3><p>We talk through your business, goals, and what you need from your site.</p></div>
+    <div class="process-step glass-card reveal reveal-delay-2"><div class="process-num">02</div><h3>We Design</h3><p>We build your custom site — fast, clean, built for your brand.</p></div>
+    <div class="process-step glass-card reveal reveal-delay-3"><div class="process-num">03</div><h3>You Review</h3><p>Give feedback. We revise until it's exactly what you envisioned.</p></div>
+    <div class="process-step glass-card reveal reveal-delay-4"><div class="process-num">04</div><h3>You Go Live</h3><p>We launch your site and hand everything over. You're live.</p></div>
+  </div>
+</section>
+
+<!-- WHY WEBI -->
+<section class="why container" id="why">
+  <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+    <div class="section-tag" style="justify-content:center;">Why Webi</div>
+    <h2 class="section-title">The smarter choice.</h2>
+    <p class="section-sub" style="margin:0 auto;">See how Webi stacks up against the other options out there.</p>
+  </div>
+  <div class="why-table-wrap glass-card reveal">
+    <table class="why-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="highlight">✦ Webi</th>
+          <th>Freelancer</th>
+          <th>Wix / Squarespace</th>
+          <th>Big Agency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Custom design</td><td class="highlight"><span class="check-yes">✓</span></td><td><span class="check-maybe">~</span></td><td><span class="check-no">✗</span></td><td><span class="check-yes">✓</span></td></tr>
+        <tr><td>Fast delivery (7 days)</td><td class="highlight"><span class="check-yes">✓</span></td><td><span class="check-no">✗</span></td><td><span class="check-yes">✓</span></td><td><span class="check-no">✗</span></td></tr>
+        <tr><td>Affordable pricing</td><td class="highlight"><span class="check-yes">✓</span></td><td><span class="check-maybe">~</span></td><td><span class="check-yes">✓</span></td><td><span class="check-no">✗</span></td></tr>
+        <tr><td>Mobile responsive</td><td class="highlight"><span class="check-yes">✓</span></td><td><span class="check-maybe">~</span></td><td><span class="check-yes">✓</span></td><td><span class="check-yes">✓</span></td></tr>
+        <tr><td>Unlimited revisions</td><td class="highlight"><span class="check-yes">✓</span></td><td><span class="check-no">✗</span></td><td><span class="check-no">✗</span></td><td><span class="check-no">✗</span></td></tr>
+        <tr><td>No monthly fees</td><td class="highlight"><span class="check-yes">✓</span></td><td><span class="check-yes">✓</span></td><td><span class="check-no">✗</span></td><td><span class="check-yes">✓</span></td></tr>
+        <tr><td>Direct communication</td><td class="highlight"><span class="check-yes">✓</span></td><td><span class="check-maybe">~</span></td><td><span class="check-no">✗</span></td><td><span class="check-no">✗</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="container" id="pricing">
+  <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+    <div class="section-tag" style="justify-content:center;">Pricing</div>
+    <h2 class="section-title">Straight to the point.</h2>
+    <p class="section-sub" style="margin:0 auto;">No hidden fees. No surprises. Pick your package and let's go.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card glass-card reveal reveal-delay-1">
+      <div class="pricing-name">Starter</div>
+      <div class="pricing-desc">For small businesses that need a clean web presence fast.</div>
+      <div class="pricing-price"><sup>$</sup>149</div>
+      <div class="pricing-billing">One-time payment</div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span>1-page custom website</li>
+        <li><span class="check">✓</span>Mobile responsive</li>
+        <li><span class="check">✓</span>Contact form</li>
+        <li><span class="check">✓</span>Delivered in 3–5 days</li>
+        <li><span class="check">✓</span>2 rounds of revisions</li>
+        <li class="dim"><span class="check">—</span>E-commerce</li>
+        <li class="dim"><span class="check">—</span>Custom animations</li>
+      </ul>
+      <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started →</a>
+    </div>
+    <div class="pricing-card featured glass-card reveal reveal-delay-2">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-name">Pro</div>
+      <div class="pricing-desc">For businesses that want a full site that actually converts.</div>
+      <div class="pricing-price"><sup>$</sup>349</div>
+      <div class="pricing-billing">One-time payment</div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span>Up to 5 pages</li>
+        <li><span class="check">✓</span>Mobile responsive</li>
+        <li><span class="check">✓</span>Contact form + booking</li>
+        <li><span class="check">✓</span>Delivered in 5–7 days</li>
+        <li><span class="check">✓</span>Unlimited revisions</li>
+        <li><span class="check">✓</span>Custom animations</li>
+        <li class="dim"><span class="check">—</span>E-commerce</li>
+      </ul>
+      <a href="#contact" class="pricing-btn pricing-btn-filled">Get Started →</a>
+    </div>
+    <div class="pricing-card glass-card reveal reveal-delay-3">
+      <div class="pricing-name">Premium</div>
+      <div class="pricing-desc">Full-featured for businesses ready to go next level.</div>
+      <div class="pricing-price"><sup>$</sup>699</div>
+      <div class="pricing-billing">One-time payment</div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span>Unlimited pages</li>
+        <li><span class="check">✓</span>Mobile responsive</li>
+        <li><span class="check">✓</span>Full form suite</li>
+        <li><span class="check">✓</span>Delivered in 7–10 days</li>
+        <li><span class="check">✓</span>Unlimited revisions</li>
+        <li><span class="check">✓</span>Custom animations</li>
+        <li><span class="check">✓</span>E-commerce ready</li>
+      </ul>
+      <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="container" id="testimonials">
+  <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+    <div class="section-tag" style="justify-content:center;">Testimonials</div>
+    <h2 class="section-title">Don't take our word.</h2>
+    <p class="section-sub" style="margin:0 auto;">Here's what real clients say about working with Webi.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card glass-card reveal reveal-delay-1">
+      <div class="stars"><span class="star">★★★★★</span></div>
+      <p class="testimonial-text">"Marcus built our detailing site in under a week and it looked better than we expected. Clients started reaching out through it immediately."</p>
+      <div class="testimonial-author"><div class="t-avatar av-1">M</div><div><div class="t-name">Mark T.</div><div class="t-role">Co-founder, M&M Detailing</div></div></div>
+    </div>
+    <div class="testimonial-card glass-card reveal reveal-delay-2">
+      <div class="stars"><span class="star">★★★★★</span></div>
+      <p class="testimonial-text">"Super easy to work with. He delivered a clean, professional site that really represents my brand. The turnaround was incredibly fast."</p>
+      <div class="testimonial-author"><div class="t-avatar av-2">S</div><div><div class="t-name">Sue R.</div><div class="t-role">Founder, Sue's Safe Haven</div></div></div>
+    </div>
+    <div class="testimonial-card glass-card reveal reveal-delay-3">
+      <div class="stars"><span class="star">★★★★★</span></div>
+      <p class="testimonial-text">"I didn't know what I wanted going in but Webi figured it out. The site looks legit — exactly what a coffee shop needs to stand out."</p>
+      <div class="testimonial-author"><div class="t-avatar av-3">L</div><div><div class="t-name">Lena K.</div><div class="t-role">Owner, Latte Loves KC</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq container" id="faq">
+  <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+    <div class="section-tag" style="justify-content:center;">FAQ</div>
+    <h2 class="section-title">Got questions?</h2>
+    <p class="section-sub" style="margin:0 auto;">Everything you need to know before reaching out.</p>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item glass-card reveal reveal-delay-1">
+      <button class="faq-q">How long does it take? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Most projects are delivered within 3–7 days depending on the package. Starter takes 3–5 days, Pro takes 5–7, and Premium takes 7–10. We'll always give you a clear timeline upfront.</div>
+    </div>
+    <div class="faq-item glass-card reveal reveal-delay-2">
+      <button class="faq-q">How do I pay? <span class="faq-icon">+</span></button>
+      <div class="faq-a">We accept all major cards, PayPal, Cash App, and Venmo. Payment is due upfront for Starter and split 50/50 for Pro and Premium packages.</div>
+    </div>
+    <div class="faq-item glass-card reveal reveal-delay-3">
+      <button class="faq-q">Do I own my website? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Yes, 100%. Once delivered you own everything — the code, the domain, all of it. There are no ongoing fees from us unless you choose to add hosting support.</div>
+    </div>
+    <div class="faq-item glass-card reveal reveal-delay-4">
+      <button class="faq-q">How many revisions do I get? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Starter includes 2 rounds of revisions. Pro and Premium include unlimited revisions until you're happy. We won't stop until the site is exactly what you envisioned.</div>
+    </div>
+    <div class="faq-item glass-card reveal reveal-delay-1">
+      <button class="faq-q">Do you host the website? <span class="faq-icon">+</span></button>
+      <div class="faq-a">We don't host by default but we'll help you set up hosting on a platform like GitHub Pages (free) or Netlify. We can also manage hosting for you as an add-on service.</div>
+    </div>
+    <div class="faq-item glass-card reveal reveal-delay-2">
+      <button class="faq-q">What if I don't have content ready? <span class="faq-icon">+</span></button>
+      <div class="faq-a">No problem. We can write basic copy for your site as part of the project. Just tell us about your business and we'll handle the words. You can always update it later.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact container" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal reveal-left">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">Let's build<br>something.</h2>
+      <p>Ready to take your online presence seriously? Tell us about your project and we'll get back to you within 24 hours.</p>
+      <div class="contact-detail"><div class="contact-detail-icon">✉️</div>hello@webi.studio</div>
+      <div class="contact-detail"><div class="contact-detail-icon">⚡</div>Response within 24 hours</div>
+      <div class="contact-detail"><div class="contact-detail-icon">🌍</div>Remote — serving clients everywhere</div>
+    </div>
+    <div class="form-glass-wrap glass-card reveal reveal-delay-2">
+      <div class="form">
+        <div class="form-row">
+          <div class="form-group"><label>Your Name</label><input type="text" placeholder="John Smith"></div>
+          <div class="form-group"><label>Business Name</label><input type="text" placeholder="Acme Co."></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@business.com"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="(816) 555-0100"></div>
+        </div>
+        <div class="form-group">
+          <label>Select a package</label>
+          <select>
+            <option value="" disabled selected>Choose your package</option>
+            <option>Starter — $149</option>
+            <option>Pro — $349</option>
+            <option>Premium — $699</option>
+            <option>Redesign Existing Site</option>
+            <option>Not Sure Yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your project</label>
+          <textarea placeholder="What does your business do, what do you need, and when do you need it by?"></textarea>
+        </div>
+        <button class="form-submit"><span>Let's Build Something →</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo-wrap">
+        <div class="footer-logo-icon">W</div>
+        <span class="footer-logo-text">Webi.</span>
+      </a>
+      <p>We build fast, modern, conversion-focused websites for businesses that are serious about their online presence.</p>
+      <div class="footer-socials" style="margin-top:1rem;">
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">ig</a>
+        <a href="#" class="social-btn">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#pricing">Starter Website</a>
+      <a href="#pricing">Pro Website</a>
+      <a href="#pricing">Premium Website</a>
+      <a href="#contact">Site Redesign</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About Us</a>
+      <a href="#process">Our Process</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:hello@webi.studio">hello@webi.studio</a>
+      <a href="#contact">Get a Quote</a>
+      <a href="#contact">Start a Project</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Webi. All rights reserved. Kansas City, MO</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // CUSTOM CURSOR
+  const cursor = document.getElementById('cursor');
+  const cursorGlow = document.getElementById('cursor-glow');
+  let mx = 0, my = 0, gx = 0, gy = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateCursor() {
+    gx += (mx - gx) * 0.12;
+    gy += (my - gy) * 0.12;
+    cursorGlow.style.left = gx + 'px';
+    cursorGlow.style.top = gy + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // RIPPLE ON BUTTONS
+  document.querySelectorAll('.btn-gradient, .btn-glass, .form-submit, .pricing-btn').forEach(btn => {
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    btn.addEventListener('click', function(e) {
+      const rect = this.getBoundingClientRect();
+      const r = document.createElement('span');
+      const size = Math.max(rect.width, rect.height);
+      r.classList.add('ripple');
+      r.style.width = r.style.height = size + 'px';
+      r.style.left = (e.clientX - rect.left - size/2) + 'px';
+      r.style.top = (e.clientY - rect.top - size/2) + 'px';
+      this.appendChild(r);
+      setTimeout(() => r.remove(), 600);
+    });
+  });
+
+  // 3D TILT ON CARDS
+  document.querySelectorAll('.about-card, .process-step, .pricing-card, .testimonial-card, .faq-item, .stat-glass').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rotX = ((y - cy) / cy) * -6;
+      const rotY = ((x - cx) / cx) * 6;
+      card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.4s ease';
+      setTimeout(() => card.style.transition = '', 400);
+    });
+  });
+
+  // TYPING EFFECT
+  const words = ['Work.', 'Convert.', 'Perform.', 'Stand Out.'];
+  let wordIndex = 0, charIndex = 0, deleting = false;
+  const typingEl = document.getElementById('typing-word');
+  const s = document.createElement('style');
+  s.textContent = `#typing-word{border-right:3px solid #e5111b;padding-right:2px;animation:cb 0.75s step-end infinite;}@keyframes cb{0%,100%{border-color:#e5111b}50%{border-color:transparent}}`;
+  document.head.appendChild(s);
+
+  function type() {
+    const current = words[wordIndex];
+    if (!deleting) {
+      typingEl.textContent = current.slice(0, charIndex + 1);
+      charIndex++;
+      if (charIndex === current.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      typingEl.textContent = current.slice(0, charIndex - 1);
+      charIndex--;
+      if (charIndex === 0) { deleting = false; wordIndex = (wordIndex + 1) % words.length; }
+    }
+    setTimeout(type, deleting ? 55 : 95);
+  }
+  setTimeout(type, 1000);
+
+  // SCROLL REVEAL
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el => ro.observe(el));
+
+  // COUNTER
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target), suffix = el.dataset.suffix || '', start = performance.now();
+    function update(now) {
+      const p = Math.min((now - start) / 1800, 1), e2 = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(e2 * target) + suffix;
+      if (p < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+  const co = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); co.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num[data-target]').forEach(el => co.observe(el));
+
+  // FAQ ACCORDION
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
