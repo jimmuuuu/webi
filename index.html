@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Webi — Kansas City Web Design | Custom Websites in Days, Not Months</title>
-<meta name="description" content="Webi builds fast, custom, mobile-first websites for small businesses. Kansas City based, serving clients everywhere. Sites from $75, delivered in as little as 1–2 days.">
+<title>Webi — Kansas City Web Design Studio | Custom Websites, Live in Days</title>
+<meta name="description" content="Webi is a Kansas City web design studio crafting custom, mobile-first websites for small businesses — designed, built, and live in days, not months. From $75.">
 <link rel="canonical" href="https://webi.it.com/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Webi">
-<meta property="og:title" content="Webi — Kansas City Web Design">
-<meta property="og:description" content="Fast, custom, mobile-first websites for small businesses. Delivered in days, not months.">
+<meta property="og:title" content="Webi — Kansas City Web Design Studio">
+<meta property="og:description" content="Custom, mobile-first websites for small businesses — live in days, not months.">
 <meta property="og:url" content="https://webi.it.com/">
 <meta property="og:image" content="https://webi.it.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -19,18 +19,17 @@
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Webi — Kansas City Web Design">
-<meta name="twitter:description" content="Fast, custom, mobile-first websites for small businesses. Delivered in days, not months.">
+<meta name="twitter:title" content="Webi — Kansas City Web Design Studio">
+<meta name="twitter:description" content="Custom, mobile-first websites for small businesses — live in days, not months.">
 <meta name="twitter:image" content="https://webi.it.com/assets/og-image.png">
 
-<meta name="theme-color" content="#0e1116">
+<meta name="theme-color" content="#faf9f7">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=4.0.0">
+<link rel="preload" href="assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v=5.0.0">
 
 <script type="application/ld+json">
 {
@@ -48,7 +47,9 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<nav aria-label="Main navigation">
+<div id="cursor-dot" aria-hidden="true"><span class="cursor-label"></span></div>
+
+<nav aria-label="Main navigation" id="site-nav">
   <a href="#" class="nav-logo-wrap" aria-label="Webi — home">
     <img src="assets/favicon.svg" alt="" class="nav-logo-icon" width="34" height="34">
     <span class="nav-logo-text">Webi</span>
@@ -57,319 +58,406 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">
-    <li><a href="#work">Our Work</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    <li><a href="#contact" class="nav-cta magnetic">Start a Project</a></li>
   </ul>
 </nav>
 
 <main id="main">
-<section class="hero container">
-  <p class="hero-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Web Design Studio — Kansas City</p>
-  <h1>We Build <span class="gradient-text">Websites</span><br>That Work.</h1>
-  <p class="hero-sub">Custom, mobile-first websites for small businesses that are serious about their online presence — designed, built, and live in days, not months.</p>
-  <div class="hero-actions">
-    <a href="#contact" class="btn-gradient">Start Your Project →</a>
-    <a href="#work" class="btn-glass">See Our Work</a>
-  </div>
 
-  <div class="hero-visual">
-    <span class="hero-chip">⚡ Live in <span class="chip-accent">days</span>, not months</span>
+<!-- HERO -->
+<section class="hero" id="top">
+  <p class="hero-eyebrow" data-hero-fade>Web Design Studio — Kansas City</p>
+  <h1 data-split>Websites that <em>mean</em> business.</h1>
+  <p class="hero-sub" data-hero-fade>Custom, mobile-first sites for small businesses that take their online presence seriously — designed, built, and live in days, not months.</p>
+  <div class="hero-actions" data-hero-fade>
+    <a href="#contact" class="btn-primary magnetic">Start a Project <span class="btn-arrow" aria-hidden="true">→</span></a>
+    <a href="#work" class="btn-secondary">See our work</a>
+  </div>
+  <p class="hero-trust" data-hero-fade><span class="stars" aria-hidden="true">★★★★★</span> Rated 5.0 by 20+ small businesses</p>
+  <div class="hero-visual" data-hero-fade>
     <div class="browser-frame">
       <div class="browser-bar" aria-hidden="true">
         <div class="browser-dots"><span></span><span></span><span></span></div>
         <div class="browser-url">safeplacetoplay.org</div>
       </div>
-      <img src="assets/work-safeplacetoplay.jpg" alt="Homepage of safeplacetoplay.org, a nonprofit website designed by Webi" width="1280" height="800" fetchpriority="high">
+      <img src="assets/work-safeplacetoplay.jpg" alt="Homepage of safeplacetoplay.org, a nonprofit website designed by Webi" width="1280" height="800" fetchpriority="high" data-parallax>
     </div>
-    <div class="hero-frame-back" aria-hidden="true">
-      <div class="browser-frame">
-        <div class="browser-bar">
-          <div class="browser-dots"><span></span><span></span><span></span></div>
-          <div class="browser-url">your-business.com</div>
-        </div>
-        <!-- PLACEHOLDER: replace with a screenshot of another site you built (assets/work-2.jpg) -->
-        <img src="assets/work-placeholder.svg" alt="" width="1280" height="800">
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat-glass glass-card"><div class="stat-num" data-target="20" data-suffix="+">20+</div><div class="stat-label">Sites Delivered</div></div>
-    <div class="stat-glass glass-card"><div class="stat-num" data-target="100" data-suffix="%">100%</div><div class="stat-label">Client Satisfaction</div></div>
-    <div class="stat-glass glass-card"><div class="stat-num" data-target="5" data-prefix="1–" data-suffix="">1–5</div><div class="stat-label">Day Turnaround</div></div>
   </div>
 </section>
 
-<section class="container" id="work">
-  <div class="section-head reveal">
-    <p class="section-tag">Our Work</p>
-    <h2 class="section-title">Proof, not promises.</h2>
-    <p class="section-sub">Real sites we've designed and shipped for real clients. Yours could be next.</p>
+<!-- SOCIAL PROOF MARQUEE -->
+<div class="marquee-section" aria-label="Clients we've worked with">
+  <p class="marquee-label">Trusted by small businesses like</p>
+  <div class="marquee-track" aria-hidden="true">
+    <span class="marquee-item">Safe Place To Play</span><span class="marquee-item">M&amp;M Detailing</span><span class="marquee-item">Sue's Safe Haven</span><span class="marquee-item">Latte Loves KC</span><span class="marquee-item">Your Business Next</span>
+    <span class="marquee-item">Safe Place To Play</span><span class="marquee-item">M&amp;M Detailing</span><span class="marquee-item">Sue's Safe Haven</span><span class="marquee-item">Latte Loves KC</span><span class="marquee-item">Your Business Next</span>
   </div>
-  <div class="work-grid">
-    <article class="work-card glass-card reveal">
-      <div class="work-thumb">
-        <img src="assets/work-safeplacetoplay.jpg" alt="Screenshot of the Safe Place To Play homepage" loading="lazy" width="1280" height="800">
-      </div>
-      <div class="work-body">
-        <p class="work-type">Nonprofit</p>
-        <h3 class="work-name">Safe Place To Play</h3>
-        <p class="work-desc">A nonprofit installing security cameras in parks and playgrounds — full site with donations, projects, and events.</p>
-        <a class="work-link" href="https://safeplacetoplay.org" target="_blank" rel="noopener">View Site <span aria-hidden="true">→</span></a>
-      </div>
-    </article>
+</div>
 
-    <!-- ============================================================
-         PLACEHOLDER PROJECT CARD #1
-         To publish: 1) save a screenshot as assets/work-2.jpg
-                     2) swap the .work-thumb-placeholder div for:
-                        <img src="assets/work-2.jpg" alt="Screenshot of PROJECT NAME homepage" loading="lazy">
-                     3) fill in the name, description, and link below
-         ============================================================ -->
-    <article class="work-card glass-card reveal reveal-delay-1">
-      <div class="work-thumb">
-        <div class="work-thumb-placeholder">
-          <span class="ph-icon" aria-hidden="true">🖼️</span>
-          <span>Project screenshot<br>coming soon</span>
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="section-tag">Selected Work</p>
+      <h2 class="section-title">Proof, not promises.</h2>
+      <p class="section-sub">Real sites designed and shipped for real clients. Hover to take a closer look.</p>
+    </div>
+    <div class="work-grid" data-reveal-group>
+      <a class="work-card" href="https://safeplacetoplay.org" target="_blank" rel="noopener" data-cursor="View →" data-reveal>
+        <div class="work-thumb">
+          <img src="assets/work-safeplacetoplay.jpg" alt="Screenshot of the Safe Place To Play homepage" loading="lazy" width="1280" height="800">
+          <span class="work-overlay">Visit safeplacetoplay.org <span class="arrow" aria-hidden="true">→</span></span>
         </div>
-      </div>
-      <div class="work-body">
-        <p class="work-type">Local Business</p>
-        <h3 class="work-name">Your Project Here</h3>
-        <p class="work-desc">This spot is reserved for our next launch — a custom site built for a business like yours.</p>
-        <span class="work-link disabled">Launching Soon</span>
-      </div>
-    </article>
+        <div class="work-meta">
+          <p class="work-type">Nonprofit</p>
+          <h3 class="work-name">Safe Place To Play</h3>
+          <p class="work-desc">Full site with donations, projects, and events for a nonprofit securing public playgrounds.</p>
+        </div>
+      </a>
 
-    <!-- ============================================================
-         PLACEHOLDER PROJECT CARD #2 — same steps as above (assets/work-3.jpg)
-         ============================================================ -->
-    <article class="work-card glass-card reveal reveal-delay-2">
-      <div class="work-thumb">
-        <div class="work-thumb-placeholder">
-          <span class="ph-icon" aria-hidden="true">🖼️</span>
-          <span>Project screenshot<br>coming soon</span>
+      <!-- ============================================================
+           PLACEHOLDER PROJECT CARD #1
+           To publish: 1) save a screenshot as assets/work-2.jpg
+                       2) swap .work-thumb-placeholder for:
+                          <img src="assets/work-2.jpg" alt="Screenshot of PROJECT NAME homepage" loading="lazy">
+                       3) update name, type, description; turn the wrapper
+                          into <a href="…"> like the first card
+           ============================================================ -->
+      <div class="work-card" data-reveal>
+        <div class="work-thumb">
+          <div class="work-thumb-placeholder">
+            <span class="ph-icon" aria-hidden="true">◐</span>
+            <span>Next project<br>launching soon</span>
+          </div>
+        </div>
+        <div class="work-meta">
+          <p class="work-type">Local Business</p>
+          <h3 class="work-name">In the studio</h3>
+          <p class="work-desc">This spot is reserved for our next launch — a custom build for a business like yours.</p>
         </div>
       </div>
-      <div class="work-body">
-        <p class="work-type">Service Business</p>
-        <h3 class="work-name">Your Project Here</h3>
-        <p class="work-desc">We're always shipping. Want your business featured here? Let's build your site next.</p>
-        <a class="work-link" href="#contact">Start a Project <span aria-hidden="true">→</span></a>
-      </div>
-    </article>
-  </div>
-</section>
 
-<section class="container" id="about">
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <div class="section-head-left">
-        <p class="section-tag">Who We Are</p>
-        <h2 class="section-title">We Mean<br>Business.</h2>
-      </div>
-      <p>Webi is a Kansas City web design studio that builds websites that work for your business. Clean, fast, and done right.</p>
-      <p>You tell us what you need, we build it. Most sites are live in under a week.</p>
-      <p>Every site is <strong>custom built and mobile-first.</strong> No page builders, no bloated templates. Just sharp work.</p>
-    </div>
-    <div class="about-cards">
-      <div class="about-card glass-card reveal">
-        <div class="about-card-icon icon-red" aria-hidden="true">⚡</div>
-        <div><h3>Fast Delivery</h3><p>Most sites are ready in 1–5 days depending on the package. You get a real timeline upfront and we stick to it.</p></div>
-      </div>
-      <div class="about-card glass-card reveal reveal-delay-1">
-        <div class="about-card-icon icon-teal" aria-hidden="true">📱</div>
-        <div><h3>Mobile-First Design</h3><p>Over half your visitors are on their phone. Every site we build looks sharp on any screen, always.</p></div>
-      </div>
-      <div class="about-card glass-card reveal reveal-delay-2">
-        <div class="about-card-icon icon-pink" aria-hidden="true">🎯</div>
-        <div><h3>Built to Convert</h3><p>Every page, button, and section is designed with one thing in mind — getting your business more customers.</p></div>
+      <!-- PLACEHOLDER PROJECT CARD #2 — same steps as above (assets/work-3.jpg) -->
+      <div class="work-card" data-reveal>
+        <div class="work-thumb">
+          <div class="work-thumb-placeholder">
+            <span class="ph-icon" aria-hidden="true">◑</span>
+            <span>Your site<br>could be here</span>
+          </div>
+        </div>
+        <div class="work-meta">
+          <p class="work-type">Service Business</p>
+          <h3 class="work-name">Yours, next</h3>
+          <p class="work-desc">We're always shipping. Want your business featured here? Let's build your site next.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="container" id="process">
-  <div class="section-head reveal">
-    <p class="section-tag">How It Works</p>
-    <h2 class="section-title">Simple. Fast. Done.</h2>
-    <p class="section-sub">No confusion. Here's exactly what working with Webi looks like.</p>
-  </div>
-  <div class="process-steps">
-    <div class="process-step glass-card reveal"><div class="process-num" aria-hidden="true">01</div><h3>Discovery Call</h3><p>We talk through your business, goals, and what you need from your site.</p></div>
-    <div class="process-step glass-card reveal reveal-delay-1"><div class="process-num" aria-hidden="true">02</div><h3>We Design</h3><p>We build your custom site — fast, clean, built for your brand.</p></div>
-    <div class="process-step glass-card reveal reveal-delay-2"><div class="process-num" aria-hidden="true">03</div><h3>You Review</h3><p>Give feedback. We revise until it's exactly what you envisioned.</p></div>
-    <div class="process-step glass-card reveal reveal-delay-3"><div class="process-num" aria-hidden="true">04</div><h3>You Go Live</h3><p>We launch your site and hand everything over. You own it all.</p></div>
-  </div>
-</section>
-
-<section class="container" id="why">
-  <div class="section-head reveal">
-    <p class="section-tag">Why Webi</p>
-    <h2 class="section-title">The smarter choice.</h2>
-    <p class="section-sub">See how Webi stacks up against the other options.</p>
-  </div>
-  <div class="why-table-wrap glass-card reveal">
-    <table class="why-table">
-      <caption class="visually-hidden">Comparison of Webi against freelancers, website builders, and big agencies</caption>
-      <thead><tr><th scope="col"><span class="visually-hidden">Feature</span></th><th scope="col" class="highlight">✦ Webi</th><th scope="col">Freelancer</th><th scope="col">Wix / Squarespace</th><th scope="col">Big Agency</th></tr></thead>
-      <tbody>
-        <tr><td>Custom design</td><td class="highlight"><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-maybe" aria-label="Sometimes">~</span></td><td><span class="check-no" aria-label="No">✗</span></td><td><span class="check-yes" aria-label="Yes">✓</span></td></tr>
-        <tr><td>Fast delivery</td><td class="highlight"><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-no" aria-label="No">✗</span></td><td><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-no" aria-label="No">✗</span></td></tr>
-        <tr><td>Affordable pricing</td><td class="highlight"><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-maybe" aria-label="Sometimes">~</span></td><td><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-no" aria-label="No">✗</span></td></tr>
-        <tr><td>Mobile responsive</td><td class="highlight"><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-maybe" aria-label="Sometimes">~</span></td><td><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-yes" aria-label="Yes">✓</span></td></tr>
-        <tr><td>Unlimited revisions</td><td class="highlight"><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-no" aria-label="No">✗</span></td><td><span class="check-no" aria-label="No">✗</span></td><td><span class="check-no" aria-label="No">✗</span></td></tr>
-        <tr><td>No monthly fees</td><td class="highlight"><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-no" aria-label="No">✗</span></td><td><span class="check-yes" aria-label="Yes">✓</span></td></tr>
-        <tr><td>Direct communication</td><td class="highlight"><span class="check-yes" aria-label="Yes">✓</span></td><td><span class="check-maybe" aria-label="Sometimes">~</span></td><td><span class="check-no" aria-label="No">✗</span></td><td><span class="check-no" aria-label="No">✗</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section class="container" id="pricing">
-  <div class="section-head reveal">
-    <p class="section-tag">Pricing</p>
-    <h2 class="section-title">Straight to the point.</h2>
-    <p class="section-sub">No hidden fees. No surprises. Pick your package and let's go.</p>
-  </div>
-  <div class="pricing-grid">
-    <div class="pricing-card glass-card reveal">
-      <h3 class="pricing-name">Starter</h3>
-      <p class="pricing-desc">For small businesses that need a clean web presence fast.</p>
-      <div class="pricing-price"><sup>$</sup>75</div>
-      <div class="pricing-billing">One-time payment</div>
-      <ul class="pricing-features">
-        <li><span class="check" aria-hidden="true">✓</span>1-page custom website</li>
-        <li><span class="check" aria-hidden="true">✓</span>Mobile responsive</li>
-        <li><span class="check" aria-hidden="true">✓</span>Contact form</li>
-        <li><span class="check" aria-hidden="true">✓</span>Delivered in 1–2 days</li>
-        <li><span class="check" aria-hidden="true">✓</span>2 rounds of revisions</li>
-        <li class="dim"><span class="check" aria-hidden="true">—</span>E-commerce</li>
-        <li class="dim"><span class="check" aria-hidden="true">—</span>Custom animations</li>
-      </ul>
-      <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started →</a>
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="section-tag">What We Do</p>
+      <h2 class="section-title">Everything your site needs. Nothing it doesn't.</h2>
     </div>
-    <div class="pricing-card featured glass-card reveal reveal-delay-1">
-      <div class="pricing-badge">★ Most Popular</div>
-      <h3 class="pricing-name">Pro</h3>
-      <p class="pricing-desc">For businesses that want a full site that actually converts.</p>
-      <div class="pricing-price"><sup>$</sup>150</div>
-      <div class="pricing-billing">One-time payment</div>
-      <ul class="pricing-features">
-        <li><span class="check" aria-hidden="true">✓</span>Up to 5 pages</li>
-        <li><span class="check" aria-hidden="true">✓</span>Mobile responsive</li>
-        <li><span class="check" aria-hidden="true">✓</span>Contact form + booking</li>
-        <li><span class="check" aria-hidden="true">✓</span>Delivered in 2–4 days</li>
-        <li><span class="check" aria-hidden="true">✓</span>Unlimited revisions</li>
-        <li><span class="check" aria-hidden="true">✓</span>Custom animations</li>
-        <li class="dim"><span class="check" aria-hidden="true">—</span>E-commerce</li>
-      </ul>
-      <a href="#contact" class="pricing-btn pricing-btn-filled">Get Started →</a>
-    </div>
-    <div class="pricing-card glass-card reveal reveal-delay-2">
-      <h3 class="pricing-name">Premium</h3>
-      <p class="pricing-desc">Full-featured for businesses ready to go next level.</p>
-      <div class="pricing-price"><sup>$</sup>300</div>
-      <div class="pricing-billing">One-time payment</div>
-      <ul class="pricing-features">
-        <li><span class="check" aria-hidden="true">✓</span>Unlimited pages</li>
-        <li><span class="check" aria-hidden="true">✓</span>Mobile responsive</li>
-        <li><span class="check" aria-hidden="true">✓</span>Full form suite</li>
-        <li><span class="check" aria-hidden="true">✓</span>Delivered in 3–5 days</li>
-        <li><span class="check" aria-hidden="true">✓</span>Unlimited revisions</li>
-        <li><span class="check" aria-hidden="true">✓</span>Custom animations</li>
-        <li><span class="check" aria-hidden="true">✓</span>E-commerce ready</li>
-      </ul>
-      <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started →</a>
+    <div class="services-grid" data-reveal-group>
+      <div class="service-card" data-reveal>
+        <p class="service-num">01</p>
+        <h3>Custom Web Design</h3>
+        <p>A site designed around your business — no page builders, no bloated templates. Mobile-first, always.</p>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="service-card" data-reveal>
+        <p class="service-num">02</p>
+        <h3>Site Redesigns</h3>
+        <p>Already have a site that isn't pulling its weight? We rebuild it into something sharp that converts.</p>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="service-card" data-reveal>
+        <p class="service-num">03</p>
+        <h3>E-Commerce</h3>
+        <p>Sell online with a storefront that's fast, trustworthy, and easy for you to manage day to day.</p>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="service-card" data-reveal>
+        <p class="service-num">04</p>
+        <h3>Hosting & Care</h3>
+        <p>We'll set you up on fast, free hosting — or manage it for you so you never think about it again.</p>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="container" id="testimonials">
-  <div class="section-head reveal">
-    <p class="section-tag">Testimonials</p>
-    <h2 class="section-title">Don't take our word.</h2>
-    <p class="section-sub">Here's what real clients say about working with Webi.</p>
-  </div>
-  <div class="testimonials-grid">
-    <figure class="testimonial-card glass-card reveal">
-      <div class="stars" aria-label="5 out of 5 stars"><span class="star" aria-hidden="true">★★★★★</span></div>
-      <blockquote class="testimonial-text">"Webi built our detailing site in under a week and it looked better than we expected. Clients started reaching out through it immediately."</blockquote>
-      <figcaption class="testimonial-author">
-        <div class="t-avatar av-1" aria-hidden="true">M</div>
-        <div><div class="t-name">Mark T.</div><div class="t-role">Co-founder, M&amp;M Detailing</div></div>
-      </figcaption>
-    </figure>
-    <figure class="testimonial-card glass-card reveal reveal-delay-1">
-      <div class="stars" aria-label="5 out of 5 stars"><span class="star" aria-hidden="true">★★★★★</span></div>
-      <blockquote class="testimonial-text">"Super easy to work with. They delivered a clean, professional site that really represents my brand. The turnaround was incredibly fast."</blockquote>
-      <figcaption class="testimonial-author">
-        <div class="t-avatar av-2" aria-hidden="true">S</div>
-        <div><div class="t-name">Sue R.</div><div class="t-role">Founder, Sue's Safe Haven</div></div>
-      </figcaption>
-    </figure>
-    <figure class="testimonial-card glass-card reveal reveal-delay-2">
-      <div class="stars" aria-label="5 out of 5 stars"><span class="star" aria-hidden="true">★★★★★</span></div>
-      <blockquote class="testimonial-text">"I didn't know what I wanted going in but Webi figured it out. The site looks legit — exactly what a coffee shop needs to stand out."</blockquote>
-      <figcaption class="testimonial-author">
-        <div class="t-avatar av-3" aria-hidden="true">L</div>
-        <div><div class="t-name">Lena K.</div><div class="t-role">Owner, Latte Loves KC</div></div>
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="faq container" id="faq">
-  <div class="section-head reveal">
-    <p class="section-tag">FAQ</p>
-    <h2 class="section-title">Got questions?</h2>
-    <p class="section-sub">Everything you need to know before reaching out.</p>
-  </div>
-  <div class="faq-grid">
-    <div class="faq-item glass-card reveal">
-      <button class="faq-q" aria-expanded="false">How long does it take? <span class="faq-icon" aria-hidden="true">+</span></button>
-      <div class="faq-a">Starter is done in 1–2 days, Pro in 2–4 days, and Premium in 3–5 days. Fast turnaround is one of the main reasons clients choose us.</div>
-    </div>
-    <div class="faq-item glass-card reveal">
-      <button class="faq-q" aria-expanded="false">How do I pay? <span class="faq-icon" aria-hidden="true">+</span></button>
-      <div class="faq-a">We accept all major cards, PayPal, Cash App, and Venmo. Payment is due upfront for Starter and split 50/50 for Pro and Premium packages.</div>
-    </div>
-    <div class="faq-item glass-card reveal">
-      <button class="faq-q" aria-expanded="false">Do I own my website? <span class="faq-icon" aria-hidden="true">+</span></button>
-      <div class="faq-a">Yes, 100%. Once delivered you own everything — the code, the domain, all of it. There are no ongoing fees from us unless you choose to add hosting support.</div>
-    </div>
-    <div class="faq-item glass-card reveal">
-      <button class="faq-q" aria-expanded="false">How many revisions do I get? <span class="faq-icon" aria-hidden="true">+</span></button>
-      <div class="faq-a">Starter includes 2 rounds of revisions. Pro and Premium include unlimited revisions until you're happy. We won't stop until it's exactly what you envisioned.</div>
-    </div>
-    <div class="faq-item glass-card reveal">
-      <button class="faq-q" aria-expanded="false">Do you host the website? <span class="faq-icon" aria-hidden="true">+</span></button>
-      <div class="faq-a">We don't host by default but we'll help you set up free hosting on GitHub Pages or Netlify. We can also manage hosting for you as an add-on service.</div>
-    </div>
-    <div class="faq-item glass-card reveal">
-      <button class="faq-q" aria-expanded="false">What if I don't have content ready? <span class="faq-icon" aria-hidden="true">+</span></button>
-      <div class="faq-a">No problem. We can write basic copy for your site as part of the project. Just tell us about your business and we'll handle the words.</div>
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="process-layout">
+      <div class="process-sticky">
+        <div class="section-head" data-reveal>
+          <p class="section-tag">How It Works</p>
+          <h2 class="section-title">A process built for speed.</h2>
+          <p class="section-sub">Five steps, zero confusion. Most projects go from first call to live site inside a week.</p>
+        </div>
+        <div class="process-current" aria-hidden="true">
+          <div class="process-current-num" id="process-num">01</div>
+          <div class="process-current-name" id="process-name">Discover</div>
+        </div>
+      </div>
+      <div class="process-steps">
+        <div class="process-step" data-step="01" data-step-name="Discover" data-reveal>
+          <p class="process-step-num">Step 01</p>
+          <h3>Discover</h3>
+          <p>A short call about your business, your goals, and what your site needs to do. You get a real timeline and a fixed price upfront.</p>
+        </div>
+        <div class="process-step" data-step="02" data-step-name="Design" data-reveal>
+          <p class="process-step-num">Step 02</p>
+          <h3>Design</h3>
+          <p>We design your site around your brand and your customers — clean, confident, and built to guide visitors toward contacting you.</p>
+        </div>
+        <div class="process-step" data-step="03" data-step-name="Build" data-reveal>
+          <p class="process-step-num">Step 03</p>
+          <h3>Build</h3>
+          <p>Hand-coded, mobile-first, and fast. No drag-and-drop platforms — just clean work that loads quickly and ranks well.</p>
+        </div>
+        <div class="process-step" data-step="04" data-step-name="Refine" data-reveal>
+          <p class="process-step-num">Step 04</p>
+          <h3>Refine</h3>
+          <p>You review, we revise. Pro and Premium include unlimited revisions — we keep going until it's exactly right.</p>
+        </div>
+        <div class="process-step" data-step="05" data-step-name="Launch" data-reveal>
+          <p class="process-step-num">Step 05</p>
+          <h3>Launch</h3>
+          <p>We take you live, hand over everything, and make sure you own it all — code, domain, the lot. No ongoing fees unless you want them.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="contact container" id="contact">
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-grid" data-reveal-group>
+    <div class="stat-item" data-reveal>
+      <div class="stat-num"><span data-count="20">0</span><span class="stat-accent">+</span></div>
+      <div class="stat-label">Sites Delivered</div>
+    </div>
+    <div class="stat-item" data-reveal>
+      <div class="stat-num"><span data-count="100">0</span><span class="stat-accent">%</span></div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+    <div class="stat-item" data-reveal>
+      <div class="stat-num"><span data-count="5">0</span><span class="stat-accent">-day</span></div>
+      <div class="stat-label">Max Turnaround</div>
+    </div>
+    <div class="stat-item" data-reveal>
+      <div class="stat-num"><span data-count="24">0</span><span class="stat-accent">h</span></div>
+      <div class="stat-label">Response Time</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT — editorial split -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-visual" data-reveal>
+        <div class="browser-frame">
+          <div class="browser-bar" aria-hidden="true">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">your-business.com</div>
+          </div>
+          <!-- PLACEHOLDER: swap for a screenshot of another site you've built -->
+          <img src="assets/work-placeholder.svg" alt="Preview placeholder for an upcoming Webi project" width="1280" height="800" loading="lazy">
+        </div>
+      </div>
+      <div class="about-text" data-reveal>
+        <div class="section-head">
+          <p class="section-tag">Who We Are</p>
+          <h2 class="section-title">A studio, not a template shop.</h2>
+        </div>
+        <p>Webi is a Kansas City web design studio for small businesses. You talk directly to the person building your site — no account managers, no handoffs, no <strong>template smell</strong>.</p>
+        <ul class="about-points">
+          <li><span class="tick" aria-hidden="true">✓</span><span><strong>Custom built,</strong> every time — designed around your business, not a theme.</span></li>
+          <li><span class="tick" aria-hidden="true">✓</span><span><strong>Mobile-first,</strong> because over half your visitors are on their phone.</span></li>
+          <li><span class="tick" aria-hidden="true">✓</span><span><strong>You own everything</strong> — code, domain, content. No lock-in, no monthly fees.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head centered" data-reveal>
+      <p class="section-tag">Pricing</p>
+      <h2 class="section-title">Straight to the point.</h2>
+      <p class="section-sub">Fixed prices, no hidden fees, no subscriptions. Pick a package and let's go.</p>
+    </div>
+    <div class="pricing-grid" data-reveal-group>
+      <div class="pricing-card" data-reveal>
+        <h3 class="pricing-name">Starter</h3>
+        <p class="pricing-desc">For small businesses that need a clean web presence fast.</p>
+        <div class="pricing-price"><sup>$</sup>75</div>
+        <div class="pricing-billing">One-time payment</div>
+        <ul class="pricing-features">
+          <li><span class="check" aria-hidden="true">✓</span>1-page custom website</li>
+          <li><span class="check" aria-hidden="true">✓</span>Mobile responsive</li>
+          <li><span class="check" aria-hidden="true">✓</span>Contact form</li>
+          <li><span class="check" aria-hidden="true">✓</span>Delivered in 1–2 days</li>
+          <li><span class="check" aria-hidden="true">✓</span>2 rounds of revisions</li>
+          <li class="dim"><span class="check" aria-hidden="true">—</span>E-commerce</li>
+          <li class="dim"><span class="check" aria-hidden="true">—</span>Custom animations</li>
+        </ul>
+        <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started</a>
+      </div>
+      <div class="pricing-card featured" data-reveal>
+        <div class="pricing-badge">Most Popular</div>
+        <h3 class="pricing-name">Pro</h3>
+        <p class="pricing-desc">For businesses that want a full site that actually converts.</p>
+        <div class="pricing-price"><sup>$</sup>150</div>
+        <div class="pricing-billing">One-time payment</div>
+        <ul class="pricing-features">
+          <li><span class="check" aria-hidden="true">✓</span>Up to 5 pages</li>
+          <li><span class="check" aria-hidden="true">✓</span>Mobile responsive</li>
+          <li><span class="check" aria-hidden="true">✓</span>Contact form + booking</li>
+          <li><span class="check" aria-hidden="true">✓</span>Delivered in 2–4 days</li>
+          <li><span class="check" aria-hidden="true">✓</span>Unlimited revisions</li>
+          <li><span class="check" aria-hidden="true">✓</span>Custom animations</li>
+          <li class="dim"><span class="check" aria-hidden="true">—</span>E-commerce</li>
+        </ul>
+        <a href="#contact" class="pricing-btn pricing-btn-filled magnetic">Get Started</a>
+      </div>
+      <div class="pricing-card" data-reveal>
+        <h3 class="pricing-name">Premium</h3>
+        <p class="pricing-desc">Full-featured for businesses ready to go next level.</p>
+        <div class="pricing-price"><sup>$</sup>300</div>
+        <div class="pricing-billing">One-time payment</div>
+        <ul class="pricing-features">
+          <li><span class="check" aria-hidden="true">✓</span>Unlimited pages</li>
+          <li><span class="check" aria-hidden="true">✓</span>Mobile responsive</li>
+          <li><span class="check" aria-hidden="true">✓</span>Full form suite</li>
+          <li><span class="check" aria-hidden="true">✓</span>Delivered in 3–5 days</li>
+          <li><span class="check" aria-hidden="true">✓</span>Unlimited revisions</li>
+          <li><span class="check" aria-hidden="true">✓</span>Custom animations</li>
+          <li><span class="check" aria-hidden="true">✓</span>E-commerce ready</li>
+        </ul>
+        <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head centered" data-reveal>
+      <p class="section-tag">Testimonials</p>
+      <h2 class="section-title">Don't take our word.</h2>
+    </div>
+    <div class="testimonial-slider" data-reveal>
+      <div class="testimonial-viewport">
+        <ul class="testimonial-track" id="testimonial-track">
+          <li class="testimonial-slide">
+            <blockquote class="testimonial-quote">"Webi built our detailing site in under a week and it looked <em>better than we expected</em>. Clients started reaching out through it immediately."</blockquote>
+            <div class="t-author">
+              <div class="t-avatar" aria-hidden="true">M</div>
+              <div><div class="t-name">Mark T.</div><div class="t-role">Co-founder, M&amp;M Detailing</div></div>
+            </div>
+          </li>
+          <li class="testimonial-slide">
+            <blockquote class="testimonial-quote">"Super easy to work with. They delivered a clean, professional site that <em>really represents my brand</em>. The turnaround was incredibly fast."</blockquote>
+            <div class="t-author">
+              <div class="t-avatar av-2" aria-hidden="true">S</div>
+              <div><div class="t-name">Sue R.</div><div class="t-role">Founder, Sue's Safe Haven</div></div>
+            </div>
+          </li>
+          <li class="testimonial-slide">
+            <blockquote class="testimonial-quote">"I didn't know what I wanted going in but Webi figured it out. The site looks legit — <em>exactly what a coffee shop needs</em> to stand out."</blockquote>
+            <div class="t-author">
+              <div class="t-avatar av-3" aria-hidden="true">L</div>
+              <div><div class="t-name">Lena K.</div><div class="t-role">Owner, Latte Loves KC</div></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="slider-controls">
+        <button class="slider-arrow" id="slider-prev" aria-label="Previous testimonial">←</button>
+        <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Testimonial slides"></div>
+        <button class="slider-arrow" id="slider-next" aria-label="Next testimonial">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head centered" data-reveal>
+      <p class="section-tag">FAQ</p>
+      <h2 class="section-title">Got questions?</h2>
+    </div>
+    <div class="faq-list" data-reveal>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How long does it take? <span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Starter is done in 1–2 days, Pro in 2–4 days, and Premium in 3–5 days. Fast turnaround is one of the main reasons clients choose us.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do I pay? <span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We accept all major cards, PayPal, Cash App, and Venmo. Payment is due upfront for Starter and split 50/50 for Pro and Premium packages.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do I own my website? <span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, 100%. Once delivered you own everything — the code, the domain, all of it. There are no ongoing fees from us unless you choose to add hosting support.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How many revisions do I get? <span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Starter includes 2 rounds of revisions. Pro and Premium include unlimited revisions until you're happy. We won't stop until it's exactly what you envisioned.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you host the website? <span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We don't host by default but we'll help you set up free hosting on GitHub Pages or Netlify. We can also manage hosting for you as an add-on service.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if I don't have content ready? <span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No problem. We can write basic copy for your site as part of the project. Just tell us about your business and we'll handle the words.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="cta-band">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="cta-inner" data-reveal>
+    <h2 class="cta-title" data-split>Your competitors have websites. <em>Yours should win.</em></h2>
+    <p class="cta-sub">Tell us about your business today — your site could be live before next week.</p>
+    <a href="#contact" class="btn-primary btn-on-dark magnetic">Start Your Project <span class="btn-arrow" aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
   <div class="contact-grid">
-    <div class="contact-info reveal">
-      <div class="section-head-left">
+    <div class="contact-info" data-reveal>
+      <div class="section-head">
         <p class="section-tag">Get In Touch</p>
-        <h2 class="section-title">Let's build<br>something.</h2>
+        <h2 class="section-title">Let's build something.</h2>
       </div>
-      <p>Ready to take your online presence seriously? Tell us about your project and we'll get back to you within 24 hours.</p>
-      <a class="contact-detail" href="mailto:webidesignedit@gmail.com"><span class="contact-detail-icon" aria-hidden="true">✉️</span>webidesignedit@gmail.com</a>
+      <p>Tell us about your project and we'll get back to you within 24 hours with a plan and a fixed price.</p>
+      <a class="contact-detail" href="mailto:webidesignedit@gmail.com"><span class="contact-detail-icon" aria-hidden="true">✉</span>webidesignedit@gmail.com</a>
       <div class="contact-detail"><span class="contact-detail-icon" aria-hidden="true">⚡</span>Response within 24 hours</div>
-      <div class="contact-detail"><span class="contact-detail-icon" aria-hidden="true">📍</span>Kansas City, MO — serving clients everywhere</div>
+      <div class="contact-detail"><span class="contact-detail-icon" aria-hidden="true">◎</span>Kansas City, MO — serving clients everywhere</div>
     </div>
-    <div class="form-glass-wrap glass-card reveal reveal-delay-1">
+    <div class="form-wrap" data-reveal>
       <form class="form" id="contact-form" action="https://formsubmit.co/Ovomarcus08@gmail.com" method="POST" novalidate>
         <input type="hidden" name="_subject" value="New project inquiry — webi.it.com">
         <input type="hidden" name="_template" value="table">
@@ -418,7 +506,7 @@
           <span class="form-error" role="alert"></span>
         </div>
         <div class="form-status" id="form-status" role="status" tabindex="-1"></div>
-        <button type="submit" class="form-submit">Let's Build Something →</button>
+        <button type="submit" class="btn-primary form-submit magnetic">Send Inquiry <span class="btn-arrow" aria-hidden="true">→</span></button>
       </form>
     </div>
   </div>
@@ -427,33 +515,33 @@
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-grid">
+    <div class="footer-grid" data-reveal>
       <div class="footer-brand">
         <a href="#" class="footer-logo-wrap" aria-label="Webi — back to top">
-          <img src="assets/favicon.svg" alt="" class="footer-logo-icon" width="28" height="28">
+          <img src="assets/favicon.svg" alt="" class="footer-logo-icon" width="26" height="26">
           <span class="footer-logo-text">Webi</span>
         </a>
-        <p>We build fast, modern websites for businesses that are serious about their online presence.</p>
+        <p>A Kansas City web design studio building custom, mobile-first websites for small businesses.</p>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
-        <a href="#pricing">Starter — $75</a>
-        <a href="#pricing">Pro — $150</a>
-        <a href="#pricing">Premium — $300</a>
-        <a href="#contact">Site Redesign</a>
+        <a href="#services">Custom Web Design</a>
+        <a href="#services">Site Redesigns</a>
+        <a href="#services">E-Commerce</a>
+        <a href="#services">Hosting &amp; Care</a>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#work">Our Work</a>
-        <a href="#about">About Us</a>
-        <a href="#process">Our Process</a>
+        <h4>Studio</h4>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
         <a href="#testimonials">Testimonials</a>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <a href="mailto:webidesignedit@gmail.com">webidesignedit@gmail.com</a>
-        <a href="#contact">Get a Quote</a>
         <a href="#contact">Start a Project</a>
+        <a href="#faq">FAQ</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -466,6 +554,10 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=4.0.0" defer></script>
+<script src="js/vendor/lenis.min.js?v=5.0.0" defer></script>
+<script src="js/vendor/gsap.min.js?v=5.0.0" defer></script>
+<script src="js/vendor/ScrollTrigger.min.js?v=5.0.0" defer></script>
+<script src="js/vendor/split-type.min.js?v=5.0.0" defer></script>
+<script src="js/main.js?v=5.0.0" defer></script>
 </body>
 </html>
