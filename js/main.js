@@ -42,17 +42,25 @@
   });
 
   /* ------------------------------------------------------------------
-     Nav — shrink on scroll, hide on scroll-down, return on scroll-up
+     Nav — shrink on scroll, hide on scroll-down, return on scroll-up.
+     The same handler drives the reading-progress bar.
      ------------------------------------------------------------------ */
   var nav = document.getElementById('site-nav');
+  var progress = document.getElementById('scroll-progress');
   var lastY = 0;
   var onScrollY = function (y) {
-    nav.classList.toggle('is-scrolled', y > 40);
-    if (y > 480 && y > lastY + 6) { nav.classList.add('is-hidden'); }
-    else if (y < lastY - 6 || y <= 480) { nav.classList.remove('is-hidden'); }
+    if (nav) {
+      nav.classList.toggle('is-scrolled', y > 40);
+      if (y > 480 && y > lastY + 6) { nav.classList.add('is-hidden'); }
+      else if (y < lastY - 6 || y <= 480) { nav.classList.remove('is-hidden'); }
+    }
+    if (progress) {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+    }
     lastY = y;
   };
-  if (nav) {
+  if (nav || progress) {
     if (lenis) {
       lenis.on('scroll', function (e) { onScrollY(e.scroll); });
     } else {
@@ -197,39 +205,6 @@
     /* No motion: ensure a sensible static state */
     var firstStep = document.querySelector('.process-step');
     if (firstStep) firstStep.classList.add('is-active');
-  }
-
-  /* ------------------------------------------------------------------
-     Custom cursor dot — pointer:fine, motion allowed
-     ------------------------------------------------------------------ */
-  var cursor = document.getElementById('cursor-dot');
-  if (cursor && finePointer && motionOK) {
-    var label = cursor.querySelector('.cursor-label');
-    var cx = -100, cy = -100, dx = -100, dy = -100, shown = false;
-    document.addEventListener('mousemove', function (e) {
-      cx = e.clientX; cy = e.clientY;
-      if (!shown) { cursor.style.opacity = '0.85'; shown = true; }
-    }, { passive: true });
-    gsap.ticker.add(function () {
-      dx += (cx - dx) * 0.22; dy += (cy - dy) * 0.22;
-      cursor.style.transform = 'translate(' + (dx - cursor.offsetWidth / 2) + 'px,' + (dy - cursor.offsetHeight / 2) + 'px)';
-    });
-    var interactive = 'a, button, .faq-q, input, select, textarea';
-    document.addEventListener('mouseover', function (e) {
-      var labelled = e.target.closest('[data-cursor]');
-      if (labelled) {
-        cursor.classList.add('is-label');
-        cursor.classList.remove('is-active');
-        label.textContent = labelled.dataset.cursor;
-      } else if (e.target.closest(interactive)) {
-        cursor.classList.add('is-active');
-        cursor.classList.remove('is-label');
-        label.textContent = '';
-      } else {
-        cursor.classList.remove('is-active', 'is-label');
-        label.textContent = '';
-      }
-    }, { passive: true });
   }
 
   /* Magnetic CTAs — subtle pull toward the cursor */
@@ -388,4 +363,13 @@
       });
     });
   }
+
+  /* A small hello for anyone who peeks under the hood */
+  try {
+    console.log(
+      '%cWebi%c  Handcrafted in Kansas City — no templates, no page builders.\nWant a site like this? webidesignedit@gmail.com',
+      'font-family: Georgia, serif; font-size: 22px; font-weight: 600; color: #e8590c;',
+      'font-size: 12px; color: #55524b;'
+    );
+  } catch (err) { /* consoles are optional */ }
 })();
